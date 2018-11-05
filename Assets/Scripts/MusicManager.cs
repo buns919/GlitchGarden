@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour {
 
+    public AudioClip[] levelMusicChangeArray;
+
     private AudioSource audioSource;
 
-    public AudioClip[] levelMusicChangeArray;
+    public void ChangeVolume(float volumeValue) {
+        audioSource.volume = volumeValue;
+    }
 
     private void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -15,16 +19,17 @@ public class MusicManager : MonoBehaviour {
     // Use this for initialization
     private void Start () {
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefsManager.GetMasterVolume();
     }
 
     private void OnLevelWasLoaded(int level) {
         AudioClip currentLevelMusic = levelMusicChangeArray[level];
-        Debug.Log("Playing clip: " + currentLevelMusic);
 
-        if (currentLevelMusic) {
+        if (currentLevelMusic && currentLevelMusic != audioSource.clip) {
             audioSource.clip = currentLevelMusic;
             audioSource.loop = true;
             audioSource.Play();
         }
     }
+
 }

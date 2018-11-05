@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour {
 
     private void Start() {
         if (autoLoadNextLevelTime != 0) {
-            Invoke("LoadNextScene", autoLoadNextLevelTime);
+            Invoke("LoadStartScene", autoLoadNextLevelTime);
         }
     }
 
