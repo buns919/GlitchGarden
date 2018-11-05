@@ -8,6 +8,8 @@ public class PlayerPrefsManager : MonoBehaviour {
     const string MASTER_VOLUME_KEY = "master_volume";
     const string DIFFICULTY_KEY = "difficulty";
     const string LEVEL_KEY = "level_unlocked_";
+    const float DEFAULT_VOLUME = .8f;
+    const float DEFAULT_DIFFICULTY = 1f;
 
 	public static void SetMasterVolume(float volume) {
         if (volume >= 0f && volume <= 1f) {
@@ -19,11 +21,11 @@ public class PlayerPrefsManager : MonoBehaviour {
     }
 
     public static float GetMasterVolume() {
-        return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY, 100f);
+        return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY, DEFAULT_VOLUME);
     }
 
     public static float GetDifficulty() {
-        return PlayerPrefs.GetFloat(DIFFICULTY_KEY, 1);
+        return PlayerPrefs.GetFloat(DIFFICULTY_KEY, DEFAULT_DIFFICULTY);
     }
 
     public static void SetDifficulty(float difficulty) {
@@ -57,5 +59,10 @@ public class PlayerPrefsManager : MonoBehaviour {
             Debug.LogError("Trying to query level not in build settings");
             return false;
         }
+    }
+
+    public static void ResetToDefaults() {
+        SetDifficulty(DEFAULT_DIFFICULTY);
+        SetMasterVolume(DEFAULT_VOLUME);
     }
 }

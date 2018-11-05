@@ -28,4 +28,10 @@ public class OptionsController : MonoBehaviour {
         PlayerPrefsManager.SetDifficulty(difficultySlider.value);
         levelManager.LoadStartScene();
     }
+
+    public void SetDefaults() {
+        PlayerPrefsManager.ResetToDefaults();
+        volumeSlider.value = PlayerPrefsManager.GetMasterVolume();
+        difficultySlider.value = PlayerPrefsManager.GetDifficulty();
+    }
 }
